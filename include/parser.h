@@ -4,6 +4,7 @@
 class Parser{
     public:
         Parser();
+        void parse(string s);
 };
 
 #endif

@@ -12,4 +12,8 @@ class Memory{
 
     public:
         Memory(): memory(MEMORY_SIZE) {}  // Constructor
+
+        void loadWord(){
+            
+        }
 };
