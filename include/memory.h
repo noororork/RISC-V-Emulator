@@ -4,6 +4,7 @@
 class Memory{
     public:
         Memory();
+        vector<uint8_t> getMemory();
 };
 
 #endif

@@ -13,6 +13,10 @@ class Memory{
     public:
         Memory(): memory(MEMORY_SIZE) {}  // Constructor
 
+        vector<uint8_t>& getMemory(){
+            return memory;
+        }
+
         void loadWord(){
             
         }

@@ -2,7 +2,6 @@
 // Takes parsed instructions then assembles them into binary machine code
 
 #include "../include/memory.h"
-#include "../include/parser.h"
 #include "../include/registers.h"
 #include <cstdint>
 #include <vector>

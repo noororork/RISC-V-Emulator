@@ -2,7 +2,6 @@
 // Declares registers
 
 #include "../include/memory.h"
-#include "../include/parser.h"
 #include <cstdint>
 #include <vector>
 #include <string>
