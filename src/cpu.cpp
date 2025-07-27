@@ -13,7 +13,7 @@
 using namespace std;
 
 
-int CPU::loadProgram(string fileName){ // CPU:: = Scope resolution operator- shows it belongs to CPU class
+void CPU::loadProgram(string fileName){ // CPU:: = Scope resolution operator- shows it belongs to CPU class
     vector<uint8_t> memVec = memory.getMemory();
 
     // Finding the size of the file
@@ -21,7 +21,6 @@ int CPU::loadProgram(string fileName){ // CPU:: = Scope resolution operator- sho
     ifstream binary_file(fileName, ios::binary | ios::in);
     if (!binary_file.is_open()) {
         cerr << "Failed to open file: " << fileName << endl;
-        return 1;
     }
     binary_file.seekg(0, ios::end); // Seekg allows us to find arbitrary position in file- in this case the end
     size = binary_file.tellg();
@@ -34,5 +33,15 @@ int CPU::loadProgram(string fileName){ // CPU:: = Scope resolution operator- sho
             cout << static_cast<int>(byte) << "\n";
         }
     }
-    return 0;
+    initalisePC(memVec);
+}
+
+void CPU::initalisePC(vector<uint8_t> memVec){
+    uint32_t pc = 0x00000000;
+    std::cout << pc << "\n";
+    fetchInstruction(memVec);
+}
+
+void fetchInstruction(){
+    
 }

@@ -2,13 +2,18 @@
 #define CPU_H
 #include "../include/memory.h"
 #include <string>
+#include <vector>
+#include <cstdint>
+#include <iostream>
 
 class CPU{
     private:
-        uint32_t pc;
         Memory memory;
+        std::vector<uint8_t> mem = memory.getMemory();
     public:
-        int loadProgram(std::string fileName);  
+        void loadProgram(std::string);
+        void initalisePC(std::vector<uint8_t>);
+        void fetchInstruction(std::vector<uint8_t>);
 };
 
 #endif
