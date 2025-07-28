@@ -8,6 +8,7 @@
 class Registers{
     private:
         std::pair<std::string, uint32_t> regs[32];
+        
     public:
         Registers();
         int getRegVal(const std::string&);

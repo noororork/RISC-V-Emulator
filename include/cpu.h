@@ -1,6 +1,8 @@
 #ifndef CPU_H
 #define CPU_H
+
 #include "../include/memory.h"
+#include "../include/decoder.h"
 #include <string>
 #include <vector>
 #include <cstdint>
@@ -9,11 +11,13 @@
 class CPU{
     private:
         Memory memory;
-        std::vector<uint8_t> mem = memory.getMemory();
+        std::vector<uint8_t>& memVec = memory.getMemory(); // & ensures that memVec is a reference and not a copy- so when memory updates memVec points to the new vector
+        Decoder decoder;
+
     public:
         void loadProgram(std::string);
         void initalisePC(std::vector<uint8_t>);
-        void fetchInstruction(std::vector<uint8_t>);
+        void fetchInstruction(std::vector<uint8_t>, uint32_t);
 };
 
 #endif
