@@ -46,4 +46,5 @@ void CPU::fetchInstruction(vector<uint8_t> memVec, uint32_t pc){
     instruction = memVec[pc] | memVec[pc + 1] << 8 | memVec[pc + 2] << 16 | memVec[pc + 3] << 24; 
     cout << instruction << "\n";
     decoder.decode(instruction);
+    pc += 4; // Incrementing pc
 }
