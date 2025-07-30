@@ -17,8 +17,10 @@ class Decoder{
         char getEncodingType(uint32_t);
         uint8_t getFunc3(uint32_t);
         uint8_t getFunc7(uint32_t);
+        uint8_t getImm511(uint32_t);
         uint8_t getRs1(uint32_t);
         std::string findInstructionR(uint8_t, uint8_t);
+        std::string findInstructionI(uint8_t, uint8_t);
 };
 
 #endif

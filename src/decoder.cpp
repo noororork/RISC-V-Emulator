@@ -15,18 +15,19 @@ void Decoder::decode(uint32_t& instruction){
     if ((encodingType == 'r') || (encodingType == 'i') || (encodingType == 's') || (encodingType == 'b')){
         uint8_t func3 = getFunc3(instruction);
 
+        // Using ifelse instead of switch for flexibilty when introducing more types in the future- eg imm types
         if (encodingType == 'r'){
             uint8_t func7 = getFunc7(instruction);
             instructionName = findInstructionR(func7, func3);
 
         } else if (encodingType == 'i'){
-            uint8_t func7 = getFunc7(instruction);
-            //findInstructionR(func7);
+            uint8_t imm511 = getImm511(instruction);
+            instructionName = findInstructionR(imm511, func3);
 
         } else if (encodingType == 's'){
             uint8_t func7 = getFunc7(instruction);
             //findInstructionR(func7);
-            
+
         } else if (encodingType == 'b'){
             uint8_t func7 = getFunc7(instruction);
             //findInstructionR(func7);
@@ -54,14 +55,21 @@ char Decoder::getEncodingType(uint32_t instruction){
 uint8_t Decoder::getFunc3(uint32_t instruction){
     // Extracting 3 bits for func3
     instruction = instruction >> 12;
-    uint8_t func3 = ((1 << 3) - 1) & instruction; // Extracts 3 bits for func3
+    uint8_t func3 = ((1 << 3) - 1) & instruction;
     return func3;
 }
 
 uint8_t Decoder::getFunc7(uint32_t instruction){
-    // Extracting 7 bits for func3
+    // Extracting 7 bits for func7
     instruction = instruction >> 25;
-    uint8_t func7 = ((1 << 7) - 1) & instruction; // Extracts 3 bits for func3
+    uint8_t func7 = ((1 << 7) - 1) & instruction;
+    return func7;
+}
+
+uint8_t Decoder::getImm511(uint32_t instruction){
+    // Extracting 7 bits for imm[11:5]
+    instruction = instruction >> 25;
+    uint8_t func7 = ((1 << 7) - 1) & instruction;
     return func7;
 }
 
@@ -87,5 +95,9 @@ string Decoder::findInstructionR(uint8_t func7, uint8_t func3){
         instructionName = rInstructions.at(func3);
     }
     return instructionName;
+}
+
+string Decoder::findInstructionI(uint8_t imm511, uint8_t func3){
+
 }
 
