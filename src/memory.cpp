@@ -1,7 +1,7 @@
 // memory.cpp
 // Defines memory structure
 
-#include "../include/memory.h"
+#include "memory.h"
 #include <cstdint>
 #include <vector>
 using namespace std;

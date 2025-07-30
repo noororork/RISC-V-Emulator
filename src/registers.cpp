@@ -1,8 +1,7 @@
 // registers.cpp
 // Declares registers
 
-#include "../include/memory.h"
-#include "../include/registers.h"
+#include "registers.h"
 #include <cstdint>
 #include <vector>
 #include <string>

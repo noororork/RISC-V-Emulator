@@ -11,7 +11,12 @@
       "intelliSenseMode": "windows-gcc-x64",
       "compilerArgs": [
         ""
-      ]
+      ],
+      "browse": {
+        "path": [
+            "${workspaceFolder}/include"
+        ]
+      }
     }
   ],
   "version": 4

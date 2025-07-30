@@ -1,8 +1,8 @@
 // cpu.cpp
 // Holds registers and the pc and simulates Fetch Execute
 
-#include "../include/cpu.h"
-#include "../include/memory.h"
+#include "cpu.h"
+#include "memory.h"
 #include <cstdint>
 #include <cstdio>
 #include <vector>

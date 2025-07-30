@@ -1,7 +1,7 @@
 // Decoder.cpp
 // Instructions are passed into here from cpu.cpp and decoded
 
-#include "../include/decoder.h"
+#include "decoder.h"
 #include <string>
 #include <iostream>
 #include <bitset>
@@ -22,6 +22,7 @@ void Decoder::decode(uint32_t& instruction){
             instructionName = findInstructionR(func7, func3);
             uint8_t rd = getRd(instruction);
             uint8_t rs1 = getRs2(instruction);
+            r.findInstruction(instructionName, )
 
         // Decoding i-immediate-type instructions
         } else if (encodingType == "i-imm"){

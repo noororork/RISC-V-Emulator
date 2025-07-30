@@ -1,6 +1,11 @@
 #ifndef DECODER_H
 #define DECODER_H
 
+#include "instructions/r.h"
+#include "instructions/i_imm.h"
+#include "instructions/i.h"
+#include "instructions/s.h"
+#include "instructions/b.h"
 #include <cstdint>
 #include <map>
 #include <vector>
@@ -10,6 +15,12 @@
 
 class Decoder{
     private:
+        // Instruction type objects
+        R r;
+        I i;
+        I_imm i_imm;
+        S s;
+        B b;
         std::map<uint8_t, std::string> opcodes = {{0b0110011, "r"}, {0b0010011, "i-imm"}, {0b0000011, "i"}, {0b0100011, "s"}, {0b1100011, "b"}};
         std::map<uint8_t, std::string> rInstructions = {{0x4, "xor"}, {0x6, "or"}, {0x7, "and"}, {0x1, "sll"}, {0x2, "slt"}, {0x3, "sltu"}};
         std::map<uint8_t, std::string> iImmInstructions = {{0x0, "addi"}, {0x4, "xori"}, {0x6, "ori"}, {0x7, "andi"}, {0x1, "slli"}, {0x2, "slti"}, {0x3, "sltiu"}};

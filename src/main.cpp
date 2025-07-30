@@ -1,6 +1,6 @@
 #include <ios>
 #include <fstream>
-#include "../include/cpu.h"
+#include "cpu.h"
 
 int main(){
     // This array represents raw bytes

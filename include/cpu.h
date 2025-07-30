@@ -1,8 +1,8 @@
 #ifndef CPU_H
 #define CPU_H
 
-#include "../include/memory.h"
-#include "../include/decoder.h"
+#include "memory.h"
+#include "decoder.h"
 #include <string>
 #include <vector>
 #include <cstdint>
