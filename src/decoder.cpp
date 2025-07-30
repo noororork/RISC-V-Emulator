@@ -9,28 +9,28 @@
 using namespace std;
 
 void Decoder::decode(uint32_t& instruction){
-    char encodingType = getEncodingType(instruction);
+    string encodingType = getEncodingType(instruction);
     cout << encodingType << "\n";
     string instructionName;
-    if ((encodingType == 'r') || (encodingType == 'i') || (encodingType == 's') || (encodingType == 'b')){
+    if ((encodingType == "r") || (encodingType == "i-imm") || (encodingType == "i") || (encodingType == "s") || (encodingType == "b")){
         uint8_t func3 = getFunc3(instruction);
 
-        // Using ifelse instead of switch for flexibilty when introducing more types in the future- eg imm types
-        if (encodingType == 'r'){
+        if (encodingType == "r"){
             uint8_t func7 = getFunc7(instruction);
             instructionName = findInstructionR(func7, func3);
 
-        } else if (encodingType == 'i'){
+        } else if (encodingType == "i-imm"){
             uint8_t imm511 = getImm511(instruction);
-            instructionName = findInstructionR(imm511, func3);
+            instructionName = findInstructionIImm(imm511, func3);
 
-        } else if (encodingType == 's'){
-            uint8_t func7 = getFunc7(instruction);
-            //findInstructionR(func7);
+        } else if (encodingType == "i"){
+            instructionName = findInstructionI(func3);
 
-        } else if (encodingType == 'b'){
-            uint8_t func7 = getFunc7(instruction);
-            //findInstructionR(func7);
+        } else if (encodingType == "s"){
+            instructionName = findInstructionS(func3);
+
+        } else if (encodingType == "b"){
+            instructionName = findInstructionS(func3);
         } 
         //uint8_t rs1 = getRs1(instruction);
     }else{
@@ -38,9 +38,9 @@ void Decoder::decode(uint32_t& instruction){
     }
 }
 
-char Decoder::getEncodingType(uint32_t instruction){
+string Decoder::getEncodingType(uint32_t instruction){
     // Extracting 7 bits for opcode
-    char encodingType = '\0';
+    string encodingType = "\0";
     uint8_t opcode = ((1 << 7) - 1) & instruction; // Extracts opcodes
 
     if (opcodes.count(opcode)) {
@@ -97,7 +97,39 @@ string Decoder::findInstructionR(uint8_t func7, uint8_t func3){
     return instructionName;
 }
 
-string Decoder::findInstructionI(uint8_t imm511, uint8_t func3){
-
+string Decoder::findInstructionIImm(uint8_t imm511, uint8_t func3){
+    string instructionName;
+    if (func3 == 0x5){
+         if (imm511 == 0x00){
+            instructionName = "srli";
+        }else if (imm511 == 0x20){
+            instructionName = "srai";
+        }else{
+            cerr << "Invalid instruction\n";
+        }
+    }else {
+        instructionName = iImmInstructions.at(func3);
+    }
+    return instructionName;
 }
+
+string Decoder::findInstructionI(uint8_t func3){
+    string instructionName;
+    instructionName = iInstructions.at(func3);
+    return instructionName;
+}
+
+string Decoder::findInstructionS(uint8_t func3){
+    string instructionName;
+    instructionName = sInstructions.at(func3);
+    return instructionName;
+}
+
+string Decoder::findInstructionB(uint8_t func3){
+    string instructionName;
+    instructionName = bInstructions.at(func3);
+    return instructionName;
+}
+
+
 
