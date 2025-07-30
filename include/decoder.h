@@ -21,8 +21,14 @@ class Decoder{
         std::string getEncodingType(uint32_t);
         uint8_t getFunc3(uint32_t);
         uint8_t getFunc7(uint32_t);
-        uint8_t getImm511(uint32_t);
         uint8_t getRs1(uint32_t);
+        uint8_t getRs2(uint32_t);
+        uint8_t getRd(uint32_t);
+        uint8_t getImm12(uint32_t);
+        uint8_t getImm10_5(uint32_t);
+        uint8_t getImm11(uint32_t);
+        uint8_t getImm4_1(uint32_t);
+        uint8_t getImm11_0(uint32_t);
         std::string findInstructionR(uint8_t, uint8_t);
         std::string findInstructionIImm(uint8_t, uint8_t);
         std::string findInstructionI(uint8_t);
