@@ -5,28 +5,35 @@
 #include "../include/decoder.h"
 #include <string>
 #include <iostream>
+#include <bitset>
 using namespace std;
 
 void Decoder::decode(uint32_t& instruction){
     char encodingType = getEncodingType(instruction);
+    cout << encodingType << "\n";
     string instructionName;
-    if (encodingType == ('r' || 'i' || 's' || 'b')){
+    if ((encodingType == 'r') || (encodingType == 'i') || (encodingType == 's') || (encodingType == 'b')){
         uint8_t func3 = getFunc3(instruction);
+
         if (encodingType == 'r'){
             uint8_t func7 = getFunc7(instruction);
             instructionName = findInstructionR(func7, func3);
-            cout << instructionName << "\n";
-        } else if (encodingType == 'r'){
+
+        } else if (encodingType == 'i'){
             uint8_t func7 = getFunc7(instruction);
             //findInstructionR(func7);
-        } else if (encodingType == 'r'){
+
+        } else if (encodingType == 's'){
             uint8_t func7 = getFunc7(instruction);
             //findInstructionR(func7);
-        } else if (encodingType == 'r'){
+            
+        } else if (encodingType == 'b'){
             uint8_t func7 = getFunc7(instruction);
             //findInstructionR(func7);
         } 
         //uint8_t rs1 = getRs1(instruction);
+    }else{
+        cout << "nono" << "\n";
     }
 }
 
@@ -34,8 +41,9 @@ char Decoder::getEncodingType(uint32_t instruction){
     // Extracting 7 bits for opcode
     char encodingType = '\0';
     uint8_t opcode = ((1 << 7) - 1) & instruction; // Extracts opcodes
+
     if (opcodes.count(opcode)) {
-        char encodingType = opcodes.at(opcode);
+        encodingType = opcodes.at(opcode);
     } else {
         std::cerr << "Unknown opcode: " << opcode << '\n';
     // handle error or assign a default
@@ -45,6 +53,7 @@ char Decoder::getEncodingType(uint32_t instruction){
 
 uint8_t Decoder::getFunc3(uint32_t instruction){
     // Extracting 3 bits for func3
+    instruction = instruction >> 12;
     uint8_t func3 = ((1 << 3) - 1) & instruction; // Extracts 3 bits for func3
     return func3;
 }
