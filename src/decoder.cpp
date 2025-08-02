@@ -19,38 +19,38 @@ void Decoder::decode(uint32_t& instruction){
         // Decoding r-type instructions
         if (encodingType == "r"){
             uint8_t func7 = getFunc7(instruction);
-            instructionName = findInstructionR(func7, func3);
             uint8_t rd = getRd(instruction);
-            uint8_t rs1 = getRs2(instruction);
-            r.findInstruction(instructionName, )
+            uint8_t rs2 = getRs2(instruction);
+            r.findInstruction(rd, func3, rs1, rs2, func7);
 
         // Decoding i-immediate-type instructions
         } else if (encodingType == "i-imm"){
-            uint8_t func7 = getFunc7(instruction);
-            instructionName = findInstructionIImm(func7, func3);
+            uint8_t imm5_11 = getFunc7(instruction);
             uint8_t rd = getRd(instruction);
             uint8_t imm11_0 = getImm11_0(instruction);
+            i_imm.findInstruction(rd, func3, rs1, imm11_0, imm5_11);
 
         // Decoding i-type instructions
         } else if (encodingType == "i"){
-            instructionName = findInstructionI(func3);
             uint8_t rd = getRd(instruction);
             uint8_t imm11_0 = getImm11_0(instruction);
+            i.findInstruction(rd, func3, rs1, imm11_0);
 
         // Decoding s-type instructions
         } else if (encodingType == "s"){
-            uint8_t func7 = getFunc7(instruction);
-            instructionName = findInstructionS(func3);
-            uint8_t rs1 = getRs2(instruction);
+            uint8_t imm11_5 = getFunc7(instruction);
+            uint8_t imm4_0 = getRd(instruction);
+            uint8_t rs2 = getRs2(instruction);
+            s.findInstruction(imm4_0, func3, rs1, rs2, imm11_5);
 
         // Decoding b-type instructions
         } else if (encodingType == "b"){
-            instructionName = findInstructionS(func3);
-            uint8_t rs1 = getRs2(instruction);
+            uint8_t rs2 = getRs2(instruction);
             uint8_t imm12 = getImm12(instruction);
             uint8_t imm10_5 = getImm10_5(instruction);
             uint8_t imm11 = getImm11(instruction);
             uint8_t imm4_1 = getImm4_1(instruction);
+            b.findInstruction(imm11, imm4_1, func3, rs1, rs2, imm10_5, imm12);
         }
     }else{
         cout << "nono" << "\n";
@@ -140,64 +140,3 @@ uint8_t Decoder::getImm11_0(uint32_t instruction){
     uint8_t imm11_0 = ((1 << 12) - 1) & instruction;
     return imm11_0;
 }
-
-string Decoder::findInstructionR(uint8_t func7, uint8_t func3){
-    string instructionName;
-    if (func3 == 0x0){
-        if (func7 == 0x00){
-            instructionName = "add";
-        }else if (func7 == 0x20){
-            instructionName = "sub";
-        }else{
-            cerr << "Invalid instruction\n";
-        }
-    }else if (func3 == 0x5){
-        if (func7 == 0x00){
-            instructionName = "srl";
-        }else if (func7 == 0x20){
-            instructionName = "sra";
-        }else{
-            cerr << "Invalid instruction\n";
-        }
-    }else {
-        instructionName = rInstructions.at(func3);
-    }
-    return instructionName;
-}
-
-string Decoder::findInstructionIImm(uint8_t imm511, uint8_t func3){
-    string instructionName;
-    if (func3 == 0x5){
-         if (imm511 == 0x00){
-            instructionName = "srli";
-        }else if (imm511 == 0x20){
-            instructionName = "srai";
-        }else{
-            cerr << "Invalid instruction\n";
-        }
-    }else {
-        instructionName = iImmInstructions.at(func3);
-    }
-    return instructionName;
-}
-
-string Decoder::findInstructionI(uint8_t func3){
-    string instructionName;
-    instructionName = iInstructions.at(func3);
-    return instructionName;
-}
-
-string Decoder::findInstructionS(uint8_t func3){
-    string instructionName;
-    instructionName = sInstructions.at(func3);
-    return instructionName;
-}
-
-string Decoder::findInstructionB(uint8_t func3){
-    string instructionName;
-    instructionName = bInstructions.at(func3);
-    return instructionName;
-}
-
-
-

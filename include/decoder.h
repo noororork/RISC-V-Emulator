@@ -27,6 +27,7 @@ class Decoder{
         std::map<uint8_t, std::string> iInstructions = {{0x0, "lb"}, {0x1, "lh"}, {0x2, "lw"}, {0x4, "lbu"}, {0x5, "lhu"}};
         std::map<uint8_t, std::string> sInstructions = {{0x0, "sb"}, {0x1, "sh"}, {0x2, "sw"}};
         std::map<uint8_t, std::string> bInstructions = {{0x0, "beq"}, {0x1, "bne"}, {0x4, "blt"}, {0x5, "bge"}, {0x6, "bltu"}, {0x7, "bgeu"}};
+    
     public:
         void decode(uint32_t&);
         std::string getEncodingType(uint32_t);
