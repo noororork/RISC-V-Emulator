@@ -4,14 +4,14 @@
 #include <string>
 #include <utility> // For pair type
 #include <cstdint>
+#include <array>
 
 class Registers{
     private:
-        std::pair<std::string, uint32_t> regs[32];
-        
+        std::array<uint8_t, 32> regs;
+
     public:
-        Registers();
-        int getRegVal(const std::string&);
+        std::array<uint8_t, 32>& getRegs();
 };
 
 #endif

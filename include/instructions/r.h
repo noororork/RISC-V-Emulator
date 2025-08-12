@@ -4,16 +4,19 @@
 #include <cstdint>
 #include <map>
 #include <unordered_map>
-#include <vector>
+#include <array>
 #include <string>
 #include <utility>
 #include <any>
 #include <functional>
+#include "registers.h"
 
 class R{
     private:
         using func = std::function<void(uint8_t, uint8_t, uint8_t)>; //<returnType(params)>
         std::unordered_map<uint8_t, func> rInstructions;
+        Registers reg;
+        std::array<uint8_t, 32>& registers = reg.getRegs();
 
     public:
         R();
