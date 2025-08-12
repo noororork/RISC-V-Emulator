@@ -58,7 +58,8 @@ void R::execute_srl(uint8_t rd, uint8_t rs1, uint8_t rs2){
 
 void R::execute_sra(uint8_t rd, uint8_t rs1, uint8_t rs2){
     cout << "sra\n";
-    registers[rd] = registers[rs1] >> registers[rs2]; // fix msb extend
+    int8_t signed_rs1 = static_cast<int8_t>(registers[rs1]); // Casts it to a signed type for sign extension
+    registers[rd] = signed_rs1 >> registers[rs2]; 
 }
 
 void R::execute_xor(uint8_t rd, uint8_t rs1, uint8_t rs2){
@@ -83,8 +84,20 @@ void R::execute_sll(uint8_t rd, uint8_t rs1, uint8_t rs2){
 
 void R::execute_slt(uint8_t rd, uint8_t rs1, uint8_t rs2){
     cout << "slt\n";
+    int8_t signed_rs1 = static_cast<int8_t>(registers[rs1]);
+    int8_t signed_rs2 = static_cast<int8_t>(registers[rs2]);
+    if (signed_rs1 < signed_rs2){
+        registers[rd] = 1;
+    }else{
+        registers[rd] = 0;
+    }
 }
 
 void R::execute_sltu(uint8_t rd, uint8_t rs1, uint8_t rs2){
     cout << "sltu\n";
+    if (registers[rs1] < registers[rs2]){
+        registers[rd] = 1;
+    }else{
+        registers[rd] = 0;
+    }
 }
