@@ -7,27 +7,73 @@
 #include <string>
 using namespace std;
 
+R::R(){
+    // Constructor to initialise map
+    rInstructions = {
+        {{0x4, [this](uint8_t rd, uint8_t rs1, uint8_t rs2){execute_xor(rd, rs1, rs2); }}, 
+        {0x6, [this](uint8_t rd, uint8_t rs1, uint8_t rs2){execute_or(rd, rs1, rs2); }}, 
+        {0x7, [this](uint8_t rd, uint8_t rs1, uint8_t rs2){execute_and(rd, rs1, rs2); }}, 
+        {0x2, [this](uint8_t rd, uint8_t rs1, uint8_t rs2){execute_slt(rd, rs1, rs2); }}, 
+        {0x3, [this](uint8_t rd, uint8_t rs1, uint8_t rs2){execute_sltu(rd, rs1, rs2); }}
+        }
+    };
+}
+
 string R::findInstruction(uint8_t rd, uint8_t func3, uint8_t rs1, uint8_t rs2, uint8_t func7){
     string instructionName;
     if (func3 == 0x0){
         if (func7 == 0x00){
-            instructionName = "add";
+            execute_add(rd, rs1, rs2);
         }else if (func7 == 0x20){
-            instructionName = "sub";
+            execute_sub(rd, rs1, rs2);
         }else{
             cerr << "Invalid instruction\n";
         }
     }else if (func3 == 0x5){
         if (func7 == 0x00){
-            instructionName = "srl";
+            execute_srl(rd, rs1, rs2);;
         }else if (func7 == 0x20){
-            instructionName = "sra";
+            execute_sra(rd, rs1, rs2);;
         }else{
             cerr << "Invalid instruction\n";
         }
     }else {
-        instructionName = rInstructions.at(func3);
+        rInstructions.at(func3);
     }
-    cout << instructionName << "\n";
-    return instructionName;
+}
+
+void R::execute_add(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_sub(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_srl(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_sra(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_xor(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_or(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_and(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_sll(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
+}
+
+void R::execute_slt(uint8_t rd, uint8_t rs, uint8_t rs2){
+    cout << "add\n";
 }
