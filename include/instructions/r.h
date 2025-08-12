@@ -17,7 +17,7 @@ class R{
 
     public:
         R();
-        std::string findInstruction(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
+        void findInstruction(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
         void execute_add(uint8_t, uint8_t, uint8_t);
         void execute_sub(uint8_t, uint8_t, uint8_t);
         void execute_srl(uint8_t, uint8_t, uint8_t);
