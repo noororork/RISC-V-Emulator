@@ -7,7 +7,8 @@
 #include <string>
 using namespace std;
 
-R::R(){
+R::R()
+    :registers(reg.getRegs()){  // Registers must be initialised int he constructor as it is a reference
     // Constructor to initialise map
     rInstructions = {
         {{0x4, [this](uint8_t rd, uint8_t rs1, uint8_t rs2){execute_xor(rd, rs1, rs2); }}, 

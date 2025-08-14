@@ -27,13 +27,13 @@ void Decoder::decode(uint32_t& instruction){
         } else if (encodingType == "i-imm"){
             uint8_t imm5_11 = getFunc7(instruction);
             uint8_t rd = getRd(instruction);
-            uint8_t imm11_0 = getImm11_0(instruction);
+            uint16_t imm11_0 = getImm11_0(instruction);
             i_imm.findInstruction(rd, func3, rs1, imm11_0, imm5_11);
 
         // Decoding i-type instructions
         } else if (encodingType == "i"){
             uint8_t rd = getRd(instruction);
-            uint8_t imm11_0 = getImm11_0(instruction);
+            uint16_t imm11_0 = getImm11_0(instruction);
             i.findInstruction(rd, func3, rs1, imm11_0);
 
         // Decoding s-type instructions
@@ -134,9 +134,9 @@ uint8_t Decoder::getImm4_1(uint32_t instruction){
     return imm4_1;
 }
 
-uint8_t Decoder::getImm11_0(uint32_t instruction){
+uint16_t Decoder::getImm11_0(uint32_t instruction){
     // Extracting 12 bits for imm[11:0] [31:20]
     instruction = instruction >> 20;
-    uint8_t imm11_0 = ((1 << 12) - 1) & instruction;
+    uint16_t imm11_0 = ((1 << 12) - 1) & instruction;
     return imm11_0;
 }

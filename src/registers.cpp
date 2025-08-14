@@ -10,7 +10,7 @@
 using namespace std;
 
 
-array<uint8_t, 32>& Registers::getRegs(){ // Using pass-by ref doesn't copy data so faster and const means no mutation
+array<uint32_t, 32>& Registers::getRegs(){ // Using pass-by ref doesn't copy data so faster and const means no mutation
     return regs;
 }
 

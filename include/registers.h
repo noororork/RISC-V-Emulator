@@ -8,10 +8,10 @@
 
 class Registers{
     private:
-        std::array<uint8_t, 32> regs;
+        std::array<uint32_t, 32> regs;
 
     public:
-        std::array<uint8_t, 32>& getRegs();
+        std::array<uint32_t, 32>& getRegs();
 };
 
 #endif

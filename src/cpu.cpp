@@ -2,7 +2,6 @@
 // Holds registers and the pc and simulates Fetch Execute
 
 #include "cpu.h"
-#include "memory.h"
 #include <cstdint>
 #include <cstdio>
 #include <vector>
