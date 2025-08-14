@@ -3,15 +3,26 @@
 
 #include <vector>
 #include <cstdint>
+#include <cstddef> // For size_t
 
 class Memory{
     private:
-        const size_t MEMORY_SIZE = 64 * 1024;  // size_t is safer than int to define uints since there is no overflow
+        static const size_t MEMORY_SIZE = 64 * 1024;  // size_t is safer than int to define uints since there is no overflow + static so it exists at compile time
         std::vector<uint8_t> memory;  // This shows there are 64 kilobytes of 8-bit memory
 
     public:
         Memory();
         std::vector<uint8_t>& getMemory();
+
+        // Load instructions
+        uint8_t readByte(uint32_t);
+        uint8_t readHalf(uint32_t);
+        uint8_t readWord(uint32_t);
+
+        // Store instructions
+        uint8_t writeByte(uint32_t);
+        uint8_t writeHalf(uint32_t);
+        uint8_t writeWord(uint32_t);
 };
 
 #endif

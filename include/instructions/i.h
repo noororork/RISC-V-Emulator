@@ -3,17 +3,28 @@
 
 #include <cstdint>
 #include <map>
-#include <vector>
+#include <unordered_map>
+#include <array>
 #include <string>
 #include <utility>
 #include <any>
+#include <functional>
+#include "registers.h"
 
 class I{
     private:
-        std::map<uint8_t, std::string> iInstructions = {{0x0, "lb"}, {0x1, "lh"}, {0x2, "lw"}, {0x4, "lbu"}, {0x5, "lhu"}};
+        using func = std::function<void(uint8_t, uint8_t, uint8_t)>; //<returnType(params)>
+        std::unordered_map<uint8_t, func> iInstructions;
+        Registers reg;
+        std::array<uint8_t, 32>& registers = reg.getRegs();
 
     public:
-        std::string findInstruction(uint8_t, uint8_t, uint8_t, uint8_t);
+        void findInstruction(uint8_t, uint8_t, uint8_t, uint8_t);
+        void execute_lb(uint8_t, uint8_t, uint8_t);
+        void execute_lh(uint8_t, uint8_t, uint8_t);
+        void execute_lw(uint8_t, uint8_t, uint8_t);
+        void execute_lbu(uint8_t, uint8_t, uint8_t);
+        void execute_lhu(uint8_t, uint8_t, uint8_t);
 };
 
 #endif

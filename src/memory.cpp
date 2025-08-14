@@ -6,7 +6,6 @@
 #include <vector>
 using namespace std;
 
-
 Memory::Memory(): memory(MEMORY_SIZE) {}  // Constructor
 
 vector<uint8_t>& Memory::getMemory(){
