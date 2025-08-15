@@ -23,3 +23,7 @@ int16_t Memory::readHalf(uint32_t address){
 int32_t Memory::readWord(uint32_t address){
     return memory[address + 3] << 24 | memory[address + 2] << 16 | memory[address + 1] << 8 | memory[address];
 }
+
+void Memory::writeByte(uint32_t address, uint8_t rs2){
+    memory[address] = rs2;
+}

@@ -20,9 +20,9 @@ class Memory{
         int32_t readWord(uint32_t);
 
         // Store instructions
-        uint8_t writeByte(uint32_t);
-        uint8_t writeHalf(uint32_t);
-        uint8_t writeWord(uint32_t);
+        void writeByte(uint32_t, uint8_t);
+        void writeHalf(uint32_t, uint16_t);
+        void writeWord(uint32_t, uint32_t);
 };
 
 #endif
