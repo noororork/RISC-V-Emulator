@@ -16,7 +16,7 @@ class R{
         using func = std::function<void(uint8_t, uint8_t, uint8_t)>; //<returnType(params)>
         std::unordered_map<uint8_t, func> rInstructions;
         Registers reg;
-        std::array<uint8_t, 32>& registers = reg.getRegs();
+        std::array<uint32_t, 32>& registers;
 
     public:
         R();

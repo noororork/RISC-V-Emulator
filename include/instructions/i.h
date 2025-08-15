@@ -17,7 +17,7 @@ class I{
         using func = std::function<void(uint8_t, uint8_t, uint16_t)>; //<returnType(params)>
         std::unordered_map<uint8_t, func> iInstructions;
         Registers reg;
-        std::array<uint8_t, 32>& registers;
+        std::array<uint32_t, 32>& registers;
         Memory memory;
 
     public:

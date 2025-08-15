@@ -31,10 +31,29 @@ void I::execute_lb(uint8_t rd, uint8_t rs1, uint16_t imm){
     registers[rd] = extended_byte;
 }
 
-void I::execute_lh(uint8_t rd, uint8_t rs1, uint16_t imm){}
+void I::execute_lh(uint8_t rd, uint8_t rs1, uint16_t imm){
+    uint32_t address = registers[rs1] + imm;
+    int16_t half = memory.readHalf(address);
+    int32_t extended_half = half; // Sign-extended
+    registers[rd] = extended_half;
+}
 
-void I::execute_lw(uint8_t rd, uint8_t rs1, uint16_t imm){}
+void I::execute_lw(uint8_t rd, uint8_t rs1, uint16_t imm){
+    uint32_t address = registers[rs1] + imm;
+    int32_t word = memory.readWord(address);
+    registers[rd] = word;
+}
 
-void I::execute_lbu(uint8_t rd, uint8_t rs1, uint16_t imm){}
+void I::execute_lbu(uint8_t rd, uint8_t rs1, uint16_t imm){
+    uint32_t address = registers[rs1] + imm;
+    uint8_t byte = static_cast<int8_t>(memory.readByte(address));
+    uint32_t extended_byte = byte; // Zero-extended
+    registers[rd] = extended_byte;
+}
 
-void I::execute_lhu(uint8_t rd, uint8_t rs1, uint16_t imm){}
+void I::execute_lhu(uint8_t rd, uint8_t rs1, uint16_t imm){
+    uint32_t address = registers[rs1] + imm;
+    uint16_t half = static_cast<int8_t>(memory.readHalf(address));
+    uint32_t extended_half = half; // Zero-extended
+    registers[rd] = extended_half;
+}

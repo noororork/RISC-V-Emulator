@@ -15,9 +15,9 @@ class Memory{
         std::vector<uint8_t>& getMemory();
 
         // Load instructions
-        uint8_t readByte(uint32_t);
-        uint8_t readHalf(uint32_t);
-        uint8_t readWord(uint32_t);
+        int8_t readByte(uint32_t);
+        int16_t readHalf(uint32_t);
+        int32_t readWord(uint32_t);
 
         // Store instructions
         uint8_t writeByte(uint32_t);
