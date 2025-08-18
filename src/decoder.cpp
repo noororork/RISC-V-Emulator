@@ -26,9 +26,10 @@ void Decoder::decode(uint32_t& instruction){
         // Decoding i-immediate-type instructions
         } else if (encodingType == "i-imm"){
             uint8_t imm5_11 = getFunc7(instruction);
+            uint8_t imm0_4 = getRs2(instruction);
             uint8_t rd = getRd(instruction);
             uint16_t imm11_0 = getImm11_0(instruction);
-            i_imm.findInstruction(rd, func3, rs1, imm11_0, imm5_11);
+            i_imm.findInstruction(rd, func3, rs1, imm11_0, imm0_4, imm5_11);
 
         // Decoding i-type instructions
         } else if (encodingType == "i"){
