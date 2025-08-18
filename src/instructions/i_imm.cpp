@@ -8,7 +8,7 @@
 using namespace std;
 
 I_imm::I_imm()
-    :registers(reg.getRegs()){  // Registers must be initialised int he constructor as it is a reference
+    :registers(reg.getRegs()){  // Registers must be initialised in the constructor as it is a reference
     // Constructor to initialise map
     i_immInstructions = {
         {{0x0, [this](uint8_t rd, uint8_t rs1, uint16_t imm11_0){execute_addi(rd, rs1, imm11_0); }}, 

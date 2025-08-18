@@ -11,6 +11,7 @@ using namespace std;
 
 
 array<uint32_t, 32>& Registers::getRegs(){ // Using pass-by ref doesn't copy data so faster and const means no mutation
+    regs[0] = 0;
     return regs;
 }
 
