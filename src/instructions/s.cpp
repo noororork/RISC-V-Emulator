@@ -28,9 +28,11 @@ void S::execute_sb(uint8_t imm, uint8_t rs1, uint8_t rs2){
 }
 
 void S::execute_sh(uint8_t imm, uint8_t rs1, uint8_t rs2){
-
+    uint32_t address = registers[rs1] + imm;
+    memory.writeHalf(address, rs2);
 }
 
 void S::execute_sw(uint8_t imm, uint8_t rs1, uint8_t rs2){
-
+    uint32_t address = registers[rs1] + imm;
+    memory.writeWord(address, rs2);
 }
