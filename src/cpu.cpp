@@ -59,4 +59,5 @@ void CPU::fetchInstruction(vector<uint8_t>& memVec){
 
 uint32_t CPU::incrementPc(int32_t offset){
     pc += offset;
+    return pc;
 }

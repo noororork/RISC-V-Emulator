@@ -22,9 +22,10 @@ class Decoder{
         S s;
         B b;
         std::map<uint8_t, std::string> opcodes = {{0b0110011, "r"}, {0b0010011, "i-imm"}, {0b0000011, "i"}, {0b0100011, "s"}, {0b1100011, "b"}};
-    
+        int32_t offset;
+
     public:
-        void decode(uint32_t&);
+        int32_t decode(uint32_t&);
         std::string getEncodingType(uint32_t);
         uint8_t getFunc3(uint32_t);
         uint8_t getFunc7(uint32_t);

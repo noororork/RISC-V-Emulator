@@ -16,7 +16,8 @@ class CPU; // Forward declaration prevents circular includes
 
 class B{
     private:
-        using func = std::function<void(CPU&, int32_t, uint8_t, uint8_t)>; //<returnType(params)>
+        int32_t offset;
+        using func = std::function<int32_t(int32_t, uint8_t, uint8_t)>; //<returnType(params)>
         std::unordered_map<uint8_t, func> bInstructions;
         Registers reg;
         std::array<uint32_t, 32>& registers;
@@ -24,13 +25,13 @@ class B{
 
     public:
         B();
-        void findInstruction(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
-        void execute_beq(CPU&, int32_t, uint8_t, uint8_t);
-        void execute_bne(CPU&, int32_t, uint8_t, uint8_t);
-        void execute_blt(CPU&, int32_t, uint8_t, uint8_t);
-        void execute_bge(CPU&, int32_t, uint8_t, uint8_t);
-        void execute_bltu(CPU&, int32_t, uint8_t, uint8_t);
-        void execute_bgeu(CPU&, int32_t, uint8_t, uint8_t);
+        int32_t findInstruction(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
+        int32_t execute_beq(int32_t, uint8_t, uint8_t);
+        int32_t execute_bne(int32_t, uint8_t, uint8_t);
+        int32_t execute_blt(int32_t, uint8_t, uint8_t);
+        int32_t execute_bge(int32_t, uint8_t, uint8_t);
+        int32_t execute_bltu(int32_t, uint8_t, uint8_t);
+        int32_t execute_bgeu(int32_t, uint8_t, uint8_t);
 };
 
 #endif

@@ -7,7 +7,7 @@
 #include <bitset>
 using namespace std;
 
-void Decoder::decode(uint32_t& instruction){
+int32_t Decoder::decode(uint32_t& instruction){
     // Decoding instruction from 32-bits into each component
     string encodingType = getEncodingType(instruction);
     cout << encodingType << "\n";
@@ -21,7 +21,7 @@ void Decoder::decode(uint32_t& instruction){
             uint8_t func7 = getFunc7(instruction);
             uint8_t rd = getRd(instruction);
             uint8_t rs2 = getRs2(instruction);
-            r.findInstruction(rd, func3, rs1, rs2, func7);
+            offset = r.findInstruction(rd, func3, rs1, rs2, func7);
 
         // Decoding i-immediate-type instructions
         } else if (encodingType == "i-imm"){
@@ -29,20 +29,20 @@ void Decoder::decode(uint32_t& instruction){
             uint8_t imm0_4 = getRs2(instruction);
             uint8_t rd = getRd(instruction);
             uint16_t imm11_0 = getImm11_0(instruction);
-            i_imm.findInstruction(rd, func3, rs1, imm11_0, imm0_4, imm5_11);
+            offset = i_imm.findInstruction(rd, func3, rs1, imm11_0, imm0_4, imm5_11);
 
         // Decoding i-type instructions
         } else if (encodingType == "i"){
             uint8_t rd = getRd(instruction);
             uint16_t imm11_0 = getImm11_0(instruction);
-            i.findInstruction(rd, func3, rs1, imm11_0);
+            offset = i.findInstruction(rd, func3, rs1, imm11_0);
 
         // Decoding s-type instructions
         } else if (encodingType == "s"){
             uint8_t imm11_5 = getFunc7(instruction);
             uint8_t imm4_0 = getRd(instruction);
             uint8_t rs2 = getRs2(instruction);
-            s.findInstruction(imm4_0, func3, rs1, rs2, imm11_5);
+            offset = s.findInstruction(imm4_0, func3, rs1, rs2, imm11_5);
 
         // Decoding b-type instructions
         } else if (encodingType == "b"){
@@ -51,11 +51,12 @@ void Decoder::decode(uint32_t& instruction){
             uint8_t imm10_5 = getImm10_5(instruction);
             uint8_t imm11 = getImm11(instruction);
             uint8_t imm4_1 = getImm4_1(instruction);
-            b.findInstruction(imm11, imm4_1, func3, rs1, rs2, imm10_5, imm12);
+            offset = b.findInstruction(imm11, imm4_1, func3, rs1, rs2, imm10_5, imm12);
         }
     }else{
         cout << "nono" << "\n";
     }
+    return offset;
 }
 
 string Decoder::getEncodingType(uint32_t instruction){

@@ -13,23 +13,24 @@
 
 class I_imm{
     private:
-        using func = std::function<void(uint8_t, uint8_t, uint16_t)>; //<returnType(params)>
+        int32_t offset;
+        using func = std::function<int32_t(uint8_t, uint8_t, uint16_t)>; //<returnType(params)>
         std::unordered_map<uint8_t, func> i_immInstructions;
         Registers reg;
         std::array<uint32_t, 32>& registers;
     public:
         I_imm();
-        void findInstruction(uint8_t, uint8_t, uint8_t, uint16_t, uint8_t, uint8_t);
-        void execute_addi(uint8_t, uint8_t, uint16_t);
-        void execute_subi(uint8_t, uint8_t, uint16_t);
-        void execute_srli(uint8_t, uint8_t, uint16_t);
-        void execute_srai(uint8_t, uint8_t, uint16_t);
-        void execute_xori(uint8_t, uint8_t, uint16_t);
-        void execute_ori(uint8_t, uint8_t, uint16_t);
-        void execute_andi(uint8_t, uint8_t, uint16_t);
-        void execute_slli(uint8_t, uint8_t, uint8_t);
-        void execute_slti(uint8_t, uint8_t, uint8_t);
-        void execute_sltiu(uint8_t, uint8_t, uint8_t);
+        int32_t findInstruction(uint8_t, uint8_t, uint8_t, uint16_t, uint8_t, uint8_t);
+        int32_t execute_addi(uint8_t, uint8_t, uint16_t);
+        int32_t execute_subi(uint8_t, uint8_t, uint16_t);
+        int32_t execute_srli(uint8_t, uint8_t, uint16_t);
+        int32_t execute_srai(uint8_t, uint8_t, uint16_t);
+        int32_t execute_xori(uint8_t, uint8_t, uint16_t);
+        int32_t execute_ori(uint8_t, uint8_t, uint16_t);
+        int32_t execute_andi(uint8_t, uint8_t, uint16_t);
+        int32_t execute_slli(uint8_t, uint8_t, uint8_t);
+        int32_t execute_slti(uint8_t, uint8_t, uint8_t);
+        int32_t execute_sltiu(uint8_t, uint8_t, uint8_t);
 };
 
 #endif

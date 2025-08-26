@@ -14,7 +14,8 @@
 
 class I{
     private:
-        using func = std::function<void(uint8_t, uint8_t, uint16_t)>; //<returnType(params)>
+        int32_t offset;
+        using func = std::function<int32_t(uint8_t, uint8_t, uint16_t)>; //<returnType(params)>
         std::unordered_map<uint8_t, func> iInstructions;
         Registers reg;
         std::array<uint32_t, 32>& registers;
@@ -22,12 +23,12 @@ class I{
 
     public:
         I();
-        void findInstruction(uint8_t, uint8_t, uint8_t, uint16_t);
-        void execute_lb(uint8_t, uint8_t, uint16_t);
-        void execute_lh(uint8_t, uint8_t, uint16_t);
-        void execute_lw(uint8_t, uint8_t, uint16_t);
-        void execute_lbu(uint8_t, uint8_t, uint16_t);
-        void execute_lhu(uint8_t, uint8_t, uint16_t);
+        int32_t findInstruction(uint8_t, uint8_t, uint8_t, uint16_t);
+        int32_t execute_lb(uint8_t, uint8_t, uint16_t);
+        int32_t execute_lh(uint8_t, uint8_t, uint16_t);
+        int32_t execute_lw(uint8_t, uint8_t, uint16_t);
+        int32_t execute_lbu(uint8_t, uint8_t, uint16_t);
+        int32_t execute_lhu(uint8_t, uint8_t, uint16_t);
 };
 
 #endif
