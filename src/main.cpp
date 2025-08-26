@@ -1,4 +1,4 @@
-// g++ src/*.cpp src/instructions/*.cpp -Iincludes -o main.exe     
+// g++ src/*.cpp src/instructions/*.cpp -Iinclude -o main.exe     
 #include <ios>
 #include <fstream>
 #include "cpu.h"

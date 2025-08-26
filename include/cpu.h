@@ -10,6 +10,8 @@
 
 class CPU{
     private:
+        uint32_t pc;
+        int32_t offset;
         bool running = true;
         Memory memory;
         std::vector<uint8_t>& memVec = memory.getMemory(); // & ensures that memVec is a reference and not a copy- so when memory updates memVec points to the new vector
@@ -18,7 +20,8 @@ class CPU{
     public:
         void loadProgram(std::string);
         void initalisePC(std::vector<uint8_t>&);
-        void fetchInstruction(std::vector<uint8_t>&, uint32_t);
+        void fetchInstruction(std::vector<uint8_t>&);
+        uint32_t incrementPc(int32_t);
 };
 
 #endif

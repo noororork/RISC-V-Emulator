@@ -38,12 +38,12 @@ void CPU::loadProgram(string fileName){ // CPU:: = Scope resolution operator- sh
 }
 
 void CPU::initalisePC(vector<uint8_t>& memVec){
-    uint32_t pc = 0x00000000;
+    pc = 0x00000000;
     std::cout << pc << "\n";
-    fetchInstruction(memVec, pc);
+    fetchInstruction(memVec);
 }
 
-void CPU::fetchInstruction(vector<uint8_t>& memVec, uint32_t pc){
+void CPU::fetchInstruction(vector<uint8_t>& memVec){
     // Arranging 4 bytes to make a word based on little-endianness : first address memVec[pc] is lsb
     while (running){
         if (pc + 3 > 60 * 1024){ // Leaving stack space
@@ -52,7 +52,11 @@ void CPU::fetchInstruction(vector<uint8_t>& memVec, uint32_t pc){
         uint32_t instruction;
         instruction = memVec[pc] | memVec[pc + 1] << 8 | memVec[pc + 2] << 16 | memVec[pc + 3] << 24; 
         cout << instruction << "\n";
-        decoder.decode(instruction);
-        pc += 4; // Incrementing pc
+        offset = decoder.decode(instruction);
+        pc = incrementPc(offset); // Incrementing Pc
     }
+}
+
+uint32_t CPU::incrementPc(int32_t offset){
+    pc += offset;
 }
